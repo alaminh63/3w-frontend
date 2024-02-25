@@ -1,16 +1,21 @@
 import { useContext, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-
+import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import useAxiosSecure from "../Hooks/AxiosSecure";
 import { AuthContext } from "../providers/AuthProvider";
 import Logout from "../utils/Logout";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [cookies, setCookie] = useCookies();
+  const [showPassword, setShowPassword] = useState(false);
   const { fetchCurrentUser } = useContext(AuthContext);
   const { axiosSecure } = useAxiosSecure();
 
+  const handleTogglePassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -48,35 +53,69 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
+    <div className="d-flex justify-content-center mx-auto w-50 ">
+      
+      <div className="min-vh-100 d-flex align-items-center justify-content-center w-75">
+      <div className="w-100 border border-black p-5 rounded-3 bg-light shadow-lg border-opacity-50">
+          <h3 className="mb-4 text-center fw-bold">Login</h3>
 
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label
+                htmlFor="exampleInputEmail1"
+                className="fw-semibold position-relative "
+              >
+                Email address
+              </label>
+              <input
+                className="form-control border border-black border-opacity-50 border-top-0 border-end-0 border-start-0 py-1 rounded-0"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label
+                htmlFor="exampleInputPassword1"
+                className="fw-semibold position-relative  "
+              >
+                Password
+              </label>
+              <input
+                className="form-control border border-black border-opacity-50 border-top-0 border-end-0 border-start-0 py-1 rounded-0"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <button
+                className="border-0 bg-transparent  "
+                type="button"
+                onClick={handleTogglePassword}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
 
-        <button type="submit">Login</button>
-      </form>
-      <Logout />
+            <button type="submit" className="btn btn-primary w-100">
+              Login
+            </button>
+          </form>
+          <p className="text-center my-3 fw-bold">
+            Do not have an account?{" "}
+            <Link to="/register" className="text-decoration-none">
+              Signup
+            </Link>{" "}
+          </p>
+          <p className="text-center my-2 fw-semibold">Or</p>
+          <p className="text-center my-2 fw-semibold    ">
+            <FaGoogle className="  fs-4 icon-link-hover text-primary   " />
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
