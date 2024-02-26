@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [cookies, setCookie, removeCookie] = useCookies();
-  const [transectionName, setTransectionName] = useState();
+  const [transectionName, setTransectionName] = useState("Ethereum Kovan");
 
   const fetchCurrentUser = async () => {
     try {

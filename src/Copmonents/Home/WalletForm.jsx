@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useAxiosSecure from "../../Hooks/AxiosSecure";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const WalletForm = () => {
+  const { user } = useContext(AuthContext);
   const { axiosSecure } = useAxiosSecure();
   const [formData, setFormData] = useState({
     amount: "",
@@ -49,7 +52,7 @@ const WalletForm = () => {
           <div className="btn-group w-75">
             <button
               type="button"
-              className={ getButtonClass("testLinkTransaction")}
+              className={getButtonClass("testLinkTransaction")}
               onClick={() =>
                 handleChange({
                   target: {
@@ -74,13 +77,25 @@ const WalletForm = () => {
             </button>
           </div>
         </div>
-
-        <button
-          className="btn btn-primary mt-2 text-white fw-semibold customBackgroundPrimary"
-          type="submit"
-        >
-          Send Request
-        </button>
+        <div className="my-1 mb-4">
+          {user ? (
+            <button
+              className="btn btn-primary mt-2 text-white fw-semibold customBackgroundPrimary"
+              type="submit"
+            >
+              Send Request
+            </button>
+          ) : (
+            <Link to="/login">
+              <button
+                className="btn fst-italic btn-primary mt-2 text-white fw-semibold customBackgroundPrimary"
+                type="submit"
+              >
+                To request you need to login first
+              </button>
+            </Link>
+          )}
+        </div>
       </form>
     </div>
   );

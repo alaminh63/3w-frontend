@@ -6,8 +6,11 @@ import useAxiosSecure from "../Hooks/AxiosSecure";
 import { AuthContext } from "../providers/AuthProvider";
 import Logout from "../utils/Logout";
 import { Link } from "react-router-dom";
-
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const navigate = useNavigate();
+  const notify = () => toast.success("login Successfull");
   const [cookies, setCookie] = useCookies();
   const [showPassword, setShowPassword] = useState(false);
   const { fetchCurrentUser } = useContext(AuthContext);
@@ -38,6 +41,8 @@ const Login = () => {
       setCookie("accessToken", accessToken);
 
       // Fetch current user
+      notify();
+      navigate("/");
       await fetchCurrentUser();
     } catch (error) {
       console.error("Login failed:", error);
@@ -54,9 +59,8 @@ const Login = () => {
 
   return (
     <div className="d-flex justify-content-center mx-auto w-50 ">
-      
       <div className="min-vh-100 d-flex align-items-center justify-content-center w-75">
-      <div className="w-100 border border-black p-5 rounded-3 bg-light shadow-lg border-opacity-50">
+        <div className="w-100 border border-black p-5 rounded-3 bg-light shadow-lg border-opacity-50">
           <h3 className="mb-4 text-center fw-bold">Login</h3>
 
           <form onSubmit={handleSubmit}>
@@ -116,6 +120,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+
     </div>
   );
 };

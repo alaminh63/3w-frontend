@@ -13,6 +13,9 @@ function NavigationBar() {
 
   const dropdownMenu = [
     {
+      title: "Ethereum Kovan",
+    },
+    {
       title: "Arbitrum Rinkeby",
     },
     {
@@ -68,13 +71,19 @@ function NavigationBar() {
     <Navbar expand="lg" className="">
       <Container>
         <Link className="text-decoration-none fw-bolder  ">
-          <Navbar.Brand className="customPrimaryColor fs-3">Faucets</Navbar.Brand>
+          <Navbar.Brand className="customPrimaryColor fs-3">
+            Faucets
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <NavDropdown className="" title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown
+              className=""
+              title={transectionName}
+              id="basic-nav-dropdown"
+            >
               {dropdownMenu.map((item, index) => (
                 <p
                   className="my-1"
