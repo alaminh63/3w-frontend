@@ -6,6 +6,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserCircle } from "lucide-react";
+import CustomModal from "../../utils/CustomModal";
 
 function NavigationBar() {
   const { logout, user, setTransectionName, transectionName } =
@@ -77,27 +78,32 @@ function NavigationBar() {
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto py-1">
             <Nav.Link href="#home">Home</Nav.Link>
-            <NavDropdown
-              className=""
-              title={transectionName}
-              id="basic-nav-dropdown"
-            >
-              {dropdownMenu.map((item, index) => (
-                <p
-                  className="my-1"
-                  onClick={() => {
-                    handleTransectionName(item.title);
-                  }}
-                  key={index}
-                >
-                  <NavDropdown.Item href="#action/3.4">
-                    {item.title}
-                  </NavDropdown.Item>
-                </p>
-              ))}
-            </NavDropdown>
+            <div className="border border-1  border-black border-opacity-75 px-1  rounded-2 ">
+              <NavDropdown
+                className=""
+                title={transectionName}
+                id="basic-nav-dropdown"
+              >
+                {dropdownMenu.map((item, index) => (
+                  <p
+                    className="my-1 "
+                    onClick={() => {
+                      handleTransectionName(item.title);
+                    }}
+                    key={index}
+                  >
+                    <NavDropdown.Item href="#action/3.4">
+                      {item.title}
+                    </NavDropdown.Item>
+                  </p>
+                ))}
+              </NavDropdown>
+            </div>
+            <div className="mx-1 ">
+              <CustomModal />
+            </div>
             {user ? (
               <Nav.Link onClick={() => handleLogOut()} href="#home">
                 Logout

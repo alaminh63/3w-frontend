@@ -3,6 +3,7 @@ import WalletForm from "../Copmonents/Home/WalletForm";
 import { AuthContext } from "../providers/AuthProvider";
 import TransenctionHistory from "../Copmonents/Home/TransenctionHistory";
 import { IoIosWarning } from "react-icons/io";
+import CustomModal from "../utils/CustomModal";
 const Home = () => {
   const { transectionName } = useContext(AuthContext);
   return (
@@ -30,6 +31,7 @@ const Home = () => {
             <span className="fw-bold">`{transectionName}`</span>
             Link/ETH.
           </div>
+          <CustomModal />
           <div>
             <WalletForm />
           </div>
