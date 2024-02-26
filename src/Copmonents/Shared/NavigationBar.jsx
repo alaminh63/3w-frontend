@@ -80,7 +80,10 @@ function NavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto py-1">
             <Nav.Link>
-              <Link to="/dashboard" className="text-decoration-none ">
+              <Link
+                to="dashboard/profile"
+                className="text-decoration-none "
+              >
                 Dashboard
               </Link>
             </Nav.Link>
