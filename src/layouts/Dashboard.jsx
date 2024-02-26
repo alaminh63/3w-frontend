@@ -1,3 +1,4 @@
+import { FaHome } from "react-icons/fa";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Dashboard = () => {
@@ -7,7 +8,12 @@ const Dashboard = () => {
     <div style={{ display: "flex", gap: "2rem" }}>
       <div style={{ width: "20%", height: "100vh" }}>
         {/* Your left content goes here */}
-        <div style={{ marginTop: "20vh" }} className="list-group ">
+        <Link className="text-decoration-none" to="/">
+          <div className="custom text-center mt-5 fw-bold border w-75 mx-auto rounded-2 p-2 customBackgroundPrimary text-white d-flex align-items-center gap-1 justify-content-center">
+            <FaHome /> Go To Homepage
+          </div>
+        </Link>
+        <div style={{ marginTop: "10vh" }} className="list-group ">
           <Link
             to="/dashboard/profile"
             className={`list-group-item
