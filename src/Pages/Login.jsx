@@ -119,8 +119,8 @@ const Login = () => {
             <FaGoogle className="  fs-4 icon-link-hover text-primary   " />
           </p>
         </div>
+      <Toaster />
       </div>
-
     </div>
   );
 };

@@ -1,12 +1,18 @@
 import { useState } from "react";
 import axios from "axios";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+
+
 const Signup = () => {
+  const navigate = useNavigate();
+  const notify = () => toast.success("SignUp Successfull ");
   const [showPassword, setShowPassword] = useState(false);
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -51,11 +57,10 @@ const Signup = () => {
           },
         }
       );
-
-      // Handle successful registration, e.g., show a success message or redirect to login page
+      notify();
       console.log("Registration successful:", response.data);
+      navigate("/login");
     } catch (error) {
-      // Handle registration error, e.g., display an error message to the user
       console.error("Registration failed:", error);
 
       if (

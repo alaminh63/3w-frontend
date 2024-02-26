@@ -79,7 +79,11 @@ function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto py-1">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link>
+              <Link to="/dashboard" className="text-decoration-none ">
+                Dashboard
+              </Link>
+            </Nav.Link>
             <div className="border border-1  border-black border-opacity-75 px-1  rounded-2 ">
               <NavDropdown
                 className=""
