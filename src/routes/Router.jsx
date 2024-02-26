@@ -8,11 +8,16 @@ import Dashboard from "../layouts/Dashboard";
 import UserManagement from "../Pages/Dashboard/Admin/UserManagement";
 import AllTransactionHistory from "../Pages/Dashboard/Admin/AllTransactionHistory";
 import Profile from "../Pages/Dashboard/Users/Profile";
+import ProtectedRoute from "../providers/ProtectedRoute";
 
 const Router = createBrowserRouter([
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "profile",

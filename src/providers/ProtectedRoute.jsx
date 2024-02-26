@@ -5,9 +5,9 @@ import { AuthContext } from "./AuthProvider";
 const ProtectedRoute = ({ children }) => {
   const { loading, user } = useContext(AuthContext);
   const location = useLocation();
-  if (loading) {
-    return <h2>Loading</h2>;
-  }
+  // if (loading) {
+  //   return <h2>Loading</h2>;
+  // }
   if (user) {
     return children;
   }
