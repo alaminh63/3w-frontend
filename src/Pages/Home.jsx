@@ -33,7 +33,7 @@ const Home = () => {
           <div>
             <WalletForm />
           </div>
-          <div>
+          <div className="w-50">
             <TransenctionHistory />
           </div>
         </div>

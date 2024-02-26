@@ -1,6 +1,8 @@
 import { useState } from "react";
+import useAxiosSecure from "../../Hooks/AxiosSecure";
 
 const WalletForm = () => {
+  const { axiosSecure } = useAxiosSecure();
   const [formData, setFormData] = useState({
     amount: "",
     transactionType: "testLinkTransaction",
@@ -11,11 +13,22 @@ const WalletForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
+    try {
+      const response = await axiosSecure.post("/request/requestPost", formData);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Request failed:", error);
+    }
+  };
+  const getButtonClass = (type) =>
+    `btn ${
+      formData.transactionType === type
+        ? "btn-primary"
+        : "btn btn-outline-primary"
+    }`;
   return (
     <div>
       <form onSubmit={handleSubmit} className="w-50">
@@ -36,14 +49,13 @@ const WalletForm = () => {
           <div className="btn-group w-75">
             <button
               type="button"
-              className={`btn ${
-                formData.transactionType === "testLinkTransaction"
-                  ? "btn-primary"
-                  : "btn btn-outline-primary"
-              }`}
+              className={ getButtonClass("testLinkTransaction")}
               onClick={() =>
                 handleChange({
-                  target: { name: "transactionType", value: "testLinkTransaction" },
+                  target: {
+                    name: "transactionType",
+                    value: "testLinkTransaction",
+                  },
                 })
               }
             >
@@ -51,16 +63,14 @@ const WalletForm = () => {
             </button>
             <button
               type="button"
-              className={`btn ${
-                formData.transactionType === "ethTransaction"
-                  ? "btn-primary"
-                  : "btn btn-outline-primary"
-              }`}
+              className={getButtonClass("ethTransaction")}
               onClick={() =>
-                handleChange({ target: { name: "transactionType", value: "ethTransaction" } })
+                handleChange({
+                  target: { name: "transactionType", value: "ethTransaction" },
+                })
               }
             >
-           0.5 ETH
+              0.5 ETH
             </button>
           </div>
         </div>

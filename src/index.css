@@ -7,3 +7,16 @@
 .customPrimaryColor {
   color: #9b1fe9;
 }
+
+
+
+.custom-btn-transparent {
+  background-color: transparent;
+  border: 1px solid #007bff; /* Use your desired border color */
+  color: #2200ff; /* Use your desired text color */
+}
+
+.custom-btn-transparent:hover {
+  background-color: #007bff; /* Use your desired hover background color */
+  color: #fff; /* Use your desired hover text color */
+}
