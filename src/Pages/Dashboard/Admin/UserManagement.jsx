@@ -60,7 +60,6 @@ const UserManagement = () => {
     }
   }, [allUsers, refetch, isFetching]);
 
-  console.log(allUsers);
   return (
     <div>
       {" "}

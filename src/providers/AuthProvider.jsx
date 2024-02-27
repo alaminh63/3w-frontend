@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCurrentUser();
-  }, [cookies]);
+  }, [cookies, setCookie, removeCookie]);
 
   const authInfo = {
     loading,
