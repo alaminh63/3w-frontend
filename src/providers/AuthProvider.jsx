@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import useAxiosSecure from "../Hooks/AxiosSecure";
-
+import toast, { Toaster } from "react-hot-toast";
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
@@ -12,6 +12,7 @@ const AuthProvider = ({ children }) => {
   const [cookies, setCookie, removeCookie] = useCookies();
   const [transectionName, setTransectionName] = useState("Ethereum Kovan");
 
+  const notify = () => toast.success("Logout Successfull");
   const fetchCurrentUser = async () => {
     try {
       const token = cookies.accessToken;
@@ -34,6 +35,7 @@ const AuthProvider = ({ children }) => {
     try {
       await axiosSecure.post("/users/logout");
       removeCookie("accessToken", cookies.accessToken);
+      notify();
     } catch (error) {
       console.error("Error during logout:", error);
     } finally {
@@ -45,7 +47,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCurrentUser();
-  }, [cookies, setCookie]);
+  }, [cookies]);
 
   const authInfo = {
     loading,
@@ -55,7 +57,7 @@ const AuthProvider = ({ children }) => {
     transectionName,
     setTransectionName,
   };
-
+  <Toaster />;
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

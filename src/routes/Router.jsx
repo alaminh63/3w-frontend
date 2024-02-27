@@ -9,6 +9,7 @@ import UserManagement from "../Pages/Dashboard/Admin/UserManagement";
 import AllTransactionHistory from "../Pages/Dashboard/Admin/AllTransactionHistory";
 import Profile from "../Pages/Dashboard/Users/Profile";
 import ProtectedRoute from "../providers/ProtectedRoute";
+import MyTransactions from "../Pages/Dashboard/Users/MyTransactions";
 
 const Router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const Router = createBrowserRouter([
       {
         path: "allTransaction",
         element: <AllTransactionHistory />,
+      },
+      {
+        path: "myTransactions",
+        element: <MyTransactions />,
       },
     ],
   },

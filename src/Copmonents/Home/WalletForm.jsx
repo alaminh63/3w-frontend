@@ -2,13 +2,17 @@ import { useContext, useState } from "react";
 import useAxiosSecure from "../../Hooks/AxiosSecure";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
-
+import toast, { Toaster } from "react-hot-toast";
+const notify = () =>
+  toast.success("Transaction Added");
 const WalletForm = () => {
-  const { user } = useContext(AuthContext);
+  const { user, transectionName } = useContext(AuthContext);
   const { axiosSecure } = useAxiosSecure();
+
   const [formData, setFormData] = useState({
     amount: "",
     transactionType: "testLinkTransaction",
+    connectedAccount: transectionName,
   });
 
   const handleChange = (e) => {
@@ -22,6 +26,7 @@ const WalletForm = () => {
     try {
       const response = await axiosSecure.post("/request/requestPost", formData);
       console.log(response.data);
+      notify();
     } catch (error) {
       console.error("Request failed:", error);
     }
@@ -97,6 +102,7 @@ const WalletForm = () => {
           )}
         </div>
       </form>
+      <Toaster />
     </div>
   );
 };

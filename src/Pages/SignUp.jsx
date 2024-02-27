@@ -1,13 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
+const notify = () => toast.success("SignUp Successfull ");
 
 const Signup = () => {
   const navigate = useNavigate();
-  const notify = () => toast.success("SignUp Successfull ");
   const [showPassword, setShowPassword] = useState(false);
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -183,6 +183,7 @@ const Signup = () => {
           </p>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
