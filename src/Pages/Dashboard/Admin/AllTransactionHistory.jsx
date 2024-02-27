@@ -41,7 +41,7 @@ const AllTransactionHistory = () => {
   });
 
   const [singleTransaction, setSingleTransaction] = useState({});
-
+  const [selectedEmail, setSelectedEmail] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,25 +58,54 @@ const AllTransactionHistory = () => {
 
     fetchData();
   }, [axiosSecure, selectedTransactionId]);
-
-  const handleUserEmailClick = (transactionId) => {
+  const handleUserEmailClick = (transactionId, userEmail) => {
     setSelectedTransactionId(transactionId);
+    setSelectedEmail(userEmail); // Set the selected email
   };
   const [activeTab, setActiveTab] = useState("testLinkTransaction");
+  const [activeNewTab, setActiveNewTab] = useState(null);
   return (
     <div className="mt-5">
-      <div style={{ display: "flex", gap: "2rem" }}>
-        <div style={{ width: "15%", height: "100vh" }}>
+      <div style={{ display: "flex", gap: "4rem" }}>
+        <div
+          style={{
+            marginTop: "12.5vh",
+            width: "15%",
+            height: "100vh",
+          }}
+        >
+          <h6 className="text-center">USERS</h6>
           {allTransactionData.map((item, index) => (
             <div key={item._id}>
               {singleUser.data && singleUser.data[index] && (
                 <div key={singleUser.data[index]._id}>
                   <div
                     key={singleUser.data[index]._id}
-                    onClick={() => handleUserEmailClick(item._id)}
-                    style={{ cursor: "pointer" }}
+                    onClick={() =>
+                      handleUserEmailClick(
+                        item._id,
+                        singleUser.data[index].userName
+                      )
+                    }
+                    style={{
+                      cursor: "pointer",
+                      fontWeight:
+                        selectedEmail === singleUser.data[index].userName
+                          ? "bold"
+                          : "normal",
+                    }}
                   >
-                    {singleUser.data[index].email}
+                    <div
+                      onClick={() => setActiveNewTab(item._id)}
+                      style={{ width: "200px" }}
+                      className={`mt-2  btn btn-primary ${
+                        activeNewTab === item._id
+                          ? "active_tabs customPrimaryButton"
+                          : "custom-btn-transparent"
+                      }`}
+                    >
+                      {singleUser.data[index].userName}
+                    </div>
                   </div>
                 </div>
               )}
@@ -87,10 +116,7 @@ const AllTransactionHistory = () => {
         <div style={{ width: "85%" }}>
           {selectedTransactionId === null ? (
             <customMyTransaction>
-              <h3>
-                Responstable <span className="text-success">2.0</span> by{" "}
-                <span>{user.fullName}</span>
-              </h3>
+             
               <div className="tabs d-flex gap-1">
                 <button
                   onClick={() => setActiveTab("ethTransaction")}

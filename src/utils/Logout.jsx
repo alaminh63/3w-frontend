@@ -1,16 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
-
-
 const Logout = () => {
-  const { logout, setLoading } = useContext(AuthContext);
+  const { logout, fetchCurrentUser } = useContext(AuthContext);
 
   const handleLogOut = async () => {
     try {
-      setLoading(true);
+     
       await logout();
-
+      fetchCurrentUser();
     } catch (error) {
       console.error("Error during logout:", error);
     }

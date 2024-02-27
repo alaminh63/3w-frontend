@@ -26,6 +26,7 @@ const AuthProvider = ({ children }) => {
       setUser(response.data?.data);
       setLoading(false);
     } catch (error) {
+      removeCookie("accessToken", cookies.accessToken);
       console.error(error);
       setLoading(false);
     }
@@ -33,6 +34,8 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
+      setLoading(true);
+
       await axiosSecure.post("/users/logout");
       removeCookie("accessToken", cookies.accessToken);
       notify();
@@ -40,14 +43,14 @@ const AuthProvider = ({ children }) => {
       console.error("Error during logout:", error);
     } finally {
       setUser(null);
-
+      fetchCurrentUser();
       setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchCurrentUser();
-  }, [cookies, setCookie, removeCookie]);
+  }, [cookies, removeCookie, setCookie, logout]);
 
   const authInfo = {
     loading,

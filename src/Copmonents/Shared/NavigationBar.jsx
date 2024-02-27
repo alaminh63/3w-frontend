@@ -62,7 +62,8 @@ function NavigationBar() {
   };
   const handleLogOut = async () => {
     try {
-      await logout();
+      
+      logout();
     } catch (error) {
       console.error("Error during logout:", error);
     }
@@ -80,10 +81,7 @@ function NavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto py-1">
             <Nav.Link>
-              <Link
-                to="dashboard/profile"
-                className="text-decoration-none "
-              >
+              <Link to="dashboard/profile" className="text-decoration-none ">
                 Dashboard
               </Link>
             </Nav.Link>

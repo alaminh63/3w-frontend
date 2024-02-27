@@ -61,12 +61,15 @@ const UserManagement = () => {
   }, [allUsers, refetch, isFetching]);
 
   return (
-    <div>
+    <div
+      style={{
+        marginTop: "5vh",
+      }}
+    >
       {" "}
       <customMyTransaction>
         <h3>
-          Responstable <span className="text-success">2.0</span> by{" "}
-          <span>{user?.fullName}</span>
+         Manage Users
         </h3>
 
         <table className="responstable">
