@@ -4,10 +4,11 @@ import { useCookies } from "react-cookie";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import useAxiosSecure from "../Hooks/AxiosSecure";
 import { AuthContext } from "../providers/AuthProvider";
-import Logout from "../utils/Logout";
+
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+
 const Login = () => {
   const navigate = useNavigate();
   const notify = () => toast.success("login Successfull");
@@ -33,7 +34,6 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      
       const response = await axiosSecure.post("/users/login", formData);
 
       const accessToken = response.data.data.accessToken;
@@ -121,6 +121,7 @@ const Login = () => {
             <FaGoogle className="  fs-4 icon-link-hover text-primary   " />
           </p>
         </div>
+        <div></div>
         <Toaster />
       </div>
     </div>

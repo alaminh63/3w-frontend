@@ -39,6 +39,7 @@ const AuthProvider = ({ children }) => {
       await axiosSecure.post("/users/logout");
       removeCookie("accessToken", cookies.accessToken);
       notify();
+      window.location.reload();
     } catch (error) {
       console.error("Error during logout:", error);
     } finally {
