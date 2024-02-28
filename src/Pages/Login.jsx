@@ -117,6 +117,7 @@ const Login = () => {
           </p>
           <p className="text-center my-2 fw-semibold">Or</p>
           <p className="text-center my-2 fw-semibold    ">
+            {/* google auth */}
             <FaGoogle className="  fs-4 icon-link-hover text-primary   " />
           </p>
         </div>
