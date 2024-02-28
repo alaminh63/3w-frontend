@@ -22,11 +22,7 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: (
-
-            <Profile />
-      
-        ),
+        element: <Profile />,
       },
       {
         path: "userManagement",

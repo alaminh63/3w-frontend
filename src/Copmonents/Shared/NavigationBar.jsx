@@ -9,8 +9,15 @@ import { UserCircle } from "lucide-react";
 import CustomModal from "../../utils/CustomModal";
 
 function NavigationBar() {
-  const { logout, user, setTransectionName, transectionName } =
-    useContext(AuthContext);
+  const {
+    logout,
+    user,
+    setUser,
+    setTransectionName,
+    fetchCurrentUser,
+    loading,
+    transectionName,
+  } = useContext(AuthContext);
 
   const dropdownMenu = [
     {
@@ -62,8 +69,8 @@ function NavigationBar() {
   };
   const handleLogOut = async () => {
     try {
-      
       logout();
+   setUser(null)
     } catch (error) {
       console.error("Error during logout:", error);
     }
@@ -80,11 +87,16 @@ function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto py-1">
-            <Nav.Link>
-              <Link to="dashboard/profile" className="text-decoration-none ">
-                Dashboard
-              </Link>
-            </Nav.Link>
+            {user ? (
+              <Nav.Link>
+                <Link to="dashboard/profile" className="text-decoration-none ">
+                  Dashboard
+                </Link>
+              </Nav.Link>
+            ) : (
+              ""
+            )}
+
             <div className="border border-1  border-black border-opacity-75 px-1  rounded-2 ">
               <NavDropdown
                 className=""
@@ -110,9 +122,11 @@ function NavigationBar() {
               <CustomModal />
             </div>
             {user ? (
-              <Nav.Link onClick={() => handleLogOut()} href="#home">
-                Logout
-              </Nav.Link>
+              loading ? (
+                <p>Loading</p>
+              ) : (
+                <Nav.Link onClick={handleLogOut}>Logout</Nav.Link>
+              )
             ) : (
               <NavDropdown title={<UserCircle />} id="basic-nav-dropdown">
                 {userInfo.map((item, index) => (

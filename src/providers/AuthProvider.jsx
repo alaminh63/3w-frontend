@@ -43,14 +43,12 @@ const AuthProvider = ({ children }) => {
       console.error("Error during logout:", error);
     } finally {
       setUser(null);
-      fetchCurrentUser();
       setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchCurrentUser();
-  }, [cookies, removeCookie, setCookie, logout]);
+  }, [cookies.accessToken, removeCookie, axiosSecure, fetchCurrentUser]);
 
   const authInfo = {
     loading,

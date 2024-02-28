@@ -33,6 +33,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      
       const response = await axiosSecure.post("/users/login", formData);
 
       const accessToken = response.data.data.accessToken;
@@ -119,7 +120,7 @@ const Login = () => {
             <FaGoogle className="  fs-4 icon-link-hover text-primary   " />
           </p>
         </div>
-      <Toaster />
+        <Toaster />
       </div>
     </div>
   );
